@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ pest.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/pest_details.css'%}">
+   
+</head>
+<body>
+    <header>
+        <h1>{{ pest.name }}</h1>
+    </header>
+    <main>
+        <img src="{% static pest.image %}" alt="{{ pest.name }}">
+        <h2>Damages</h2>
+        <p>{{pest.description}}</p>
+        <h2>LIFE CYCLE </h2>
+        <p>{{pest.life_cycle}}</p>
+    </main>
+</body>
+</html>
