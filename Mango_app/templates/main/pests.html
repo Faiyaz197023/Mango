@@ -3,30 +3,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mango Pests</title>
-
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Force no caching -->
+  <meta http-equiv="Cache-Control" content="no-store">
+  <meta http-equiv="Pragma" content="no-cache">
+  <title>Mango Pests</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <header>
-        <h1>Mango Pests</h1>
-    </header>
-    <nav>
-        {% include 'main/nav.html' %}
-    </nav>
-    <main class="grid-container">
-        {% for pest in pests %}
-        <div class="pest-card">
-            <img src="{% static pest.image %}" alt="{{ pest.name }}">
-            <h2>{{ pest.name }}</h2>
-            <p><strong>Scientific Name:</strong> <br><i>{{ pest.scientific_name }}<br></i></p>
-            <p><strong>Affects:</strong> <br>{{ pest.affects }}<br></p>
-          
-            <a href="{% url 'pest_detail' pest.key %}">Learn More</a>
-        </div>
-        {% endfor %} 
-    </main> 
+  <header>
+    <h1>Mango Pests</h1>
+  </header>
+  <nav>
+    {% include 'main/nav.html' %}
+  </nav>
+
+  <!-- Search Forms -->
+  <div class="search-container">
+    <!-- Search by Name -->
+    <form action="{% url 'pests' %}" method="get">
+      <input type="text" name="search_query" placeholder="Search pests by name" autocomplete="off">
+      <button type="submit">Search by Name</button>
+    </form>
+    
+    <!-- Search by Affects -->
+    <form action="{% url 'pests' %}" method="get">
+      <input type="text" name="affects_query" placeholder="Search affected parts" autocomplete="off">
+      <button type="submit">Search by Affected Parts</button>
+    </form>
+  </div>
+
+  <main class="grid-container">
+    {% for pest in pests %}
+      <div class="pest-card">
+        <img src="{% static pest.image %}" alt="{{ pest.name }}">
+        <h2>{{ pest.name }}</h2>
+        <p>
+          <strong>Scientific Name:</strong> <br>
+          <i>{{ pest.scientific_name }}</i>
+        </p>
+        <p>
+          <strong>Affects:</strong> <br>
+          {{ pest.affects }}
+        </p>
+        <a href="{% url 'pest_detail' pest.key %}">Learn More</a>
+      </div>
+    {% endfor %}
+  </main>
+
+  <!-- JavaScript to clear input fields when the page is loaded from cache -->
+  <script>
+    window.addEventListener('pageshow', function(event) {
+      // Check if the page was loaded from cache
+      if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+        document.querySelectorAll('.search-container input[type="text"]').forEach(function(input) {
+          input.value = '';
+        });
+      }
+    });
+  </script>
 </body>
 </html>
