@@ -1,22 +1,53 @@
-body {
-    margin:0;
-    font-family: 'Times New Roman', Times, serif;
-}
-
-main {
-   
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    font-size:2rem;
-    justify-content:center;
-    text-align:center;
-}
-header {
-    text-align:center;
-    font-size:5rem;
-}
-img {
-    width:20%;
-    aspect-ratio:3/2;
-}
+/* Global reset for consistency */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Base styling */
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+  }
+  
+  /* Main container styling */
+  main {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* Header styling */
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Image styling */
+  img {
+    width: 100%;
+    max-width: 20rem;
+    aspect-ratio: 3 / 2;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+  
