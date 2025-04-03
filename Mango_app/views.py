@@ -41,8 +41,19 @@ def pest_detail(request, key):
 
 
 class PestsView(View):
-    def get(self, request): #get is from django's framework itself we don't need any constructer 
+    def get(self, request):
         pests = self.combine_pests_data()
+
+        # Filter by pest name if provided
+        search_query = request.GET.get('search_query')
+        if search_query:
+            pests = [pest for pest in pests if search_query.lower() in pest.name.lower()]
+
+        # Filter by affects if provided
+        affects_query = request.GET.get('affects_query')
+        if affects_query:
+            pests = [pest for pest in pests if affects_query.lower() in pest.affects.lower()]
+
         return render(request, "main/pests.html", {"pests": pests})
 
     def combine_pests_data(self):
